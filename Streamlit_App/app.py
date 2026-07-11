@@ -5,9 +5,8 @@ import joblib
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR.parent / "models"
-# Load model and feature columns
-model = joblib.load("../models/Random_Forest_House_Price.pkl")
-columns = joblib.load("../models/columns.pkl")
+model = joblib.load(MODEL_DIR / "Random_Forest_House_Price.pkl")
+columns = joblib.load(MODEL_DIR / "columns.pkl")
 
 st.set_page_config(
     page_title="House Price Prediction",
