@@ -1,7 +1,10 @@
+from pathlib import Path
 import streamlit as st
 import pandas as pd
 import joblib
 
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR.parent / "models"
 # Load model and feature columns
 model = joblib.load("../models/Random_Forest_House_Price.pkl")
 columns = joblib.load("../models/columns.pkl")
