@@ -45,31 +45,29 @@ furnishingstatus = st.selectbox(
 # ---------------- Prediction ----------------
 
 if st.button("Predict Price"):
+    if area < 200:
+        st.warning("⚠️ Area seems too small. Please enter a value of at least 200 sq.ft.")
+    else:
+        data = {
+            "area":[area],
+            "bedrooms":[bedrooms],
+            "bathrooms":[bathrooms],
+            "stories":[stories],
+            "parking":[parking],
+            "mainroad":[mainroad],
+            "guestroom":[guestroom],
+            "basement":[basement],
+            "airconditioning":[airconditioning],
+            "prefarea":[prefarea],
+            "furnishingstatus":[furnishingstatus]
+        }
 
-    data = {
-        "area":[area],
-        "bedrooms":[bedrooms],
-        "bathrooms":[bathrooms],
-        "stories":[stories],
-        "parking":[parking],
-        "mainroad":[mainroad],
-        "guestroom":[guestroom],
-        "basement":[basement],
-        "airconditioning":[airconditioning],
-        "prefarea":[prefarea],
-        "furnishingstatus":[furnishingstatus]
-    }
+        df = pd.DataFrame(data)
+        df = pd.get_dummies(df)
+        df = df.reindex(columns=columns, fill_value=0)
 
-    df = pd.DataFrame(data)
+        prediction = model.predict(df)[0]
 
-    # Convert categorical variables
-    df = pd.get_dummies(df)
-
-    # Match training columns
-    df = df.reindex(columns=columns, fill_value=0)
-
-    prediction = model.predict(df)[0]
-
-    st.success(f"🏡 Estimated House Price: ₹ {prediction:,.0f}")
+        st.success(f"🏡 Estimated House Price: ₹ {prediction:,.0f}")
 
 
