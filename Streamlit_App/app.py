@@ -19,7 +19,7 @@ st.write("Enter the house details below to predict its price.")
 
 # ---------------- Numerical Inputs ----------------
 
-area = st.number_input("Area (sq.ft)", min_value=500, max_value=20000, value=5000)
+area = st.number_input("Area (sq.ft)", min_value=200, max_value=20000, value=5000)
 
 bedrooms = st.selectbox("Bedrooms", [1,2,3,4,5,6])
 
